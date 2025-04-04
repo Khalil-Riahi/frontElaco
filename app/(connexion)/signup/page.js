@@ -59,6 +59,11 @@ export default function SignUp() {
         throw new Error(resData.message || "Signup failed! Please check your details.");
       }
 
+      const currentUserId = resData.data.user._id;
+      console.log(resData.data.user._id)
+      localStorage.setItem("userId", currentUserId);
+      console.log("Saved userId:", currentUserId);
+
       // 3) If successful
       toast.success("Signup successful! Redirecting...", {
         position: "top-right",
@@ -72,6 +77,7 @@ export default function SignUp() {
       setTimeout(() => {
         router.push("/homepage");
       }, 2000);
+      
     } catch (err) {
       console.error("Error:", err);
 
