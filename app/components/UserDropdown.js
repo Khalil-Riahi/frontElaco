@@ -4,9 +4,13 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { Dropdown } from "./Dropdown";
 import { DropdownItem } from "./DropdownItem";
+import { useRouter } from "next/navigation";
+
 
 export default function UserDropdown({user}) {
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
+
 
   function toggleDropdown(e) {
     e.stopPropagation();
@@ -86,10 +90,10 @@ export default function UserDropdown({user}) {
                   fill=""
                 />
               </svg>
-              Edit profile
+              Dasboard
             </DropdownItem>
           </li>
-          <li>
+          {/* <li>
             <DropdownItem
               onItemClick={closeDropdown}
               tag="a"
@@ -113,8 +117,8 @@ export default function UserDropdown({user}) {
               </svg>
               Account settings
             </DropdownItem>
-          </li>
-          <li>
+          </li> */}
+          {/* <li>
             <DropdownItem
               onItemClick={closeDropdown}
               tag="a"
@@ -138,10 +142,15 @@ export default function UserDropdown({user}) {
               </svg>
               Support
             </DropdownItem>
-          </li>
+          </li> */}
         </ul>
         <Link
-          href="/signin"
+          href="/login"
+          onClick={() => {
+            localStorage.removeItem("userId");
+            router.push("/login");
+
+          }}
           className="flex items-center gap-3 px-3 py-2 mt-3 font-medium text-gray-700 rounded-lg group text-theme-sm hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
         >
           <svg

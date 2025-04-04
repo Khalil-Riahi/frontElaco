@@ -64,9 +64,13 @@
 // }
 
 "use client";
-import { useState } from "react";
+// import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
+
+// import { useState } from "react";
 
 export default function SubscriptionCard({ sub }) {
+  const router = useRouter()
   async function clickToPay() {
     const obj = {
       subId: sub._id,
@@ -133,7 +137,14 @@ export default function SubscriptionCard({ sub }) {
         <button
           className="w-full py-2 px-4 bg-blue-950 hover:bg-amber-500 text-white text-lg rounded-md shadow-md transition-colors duration-300"
           type="button"
-          onClick={clickToPay}
+          onClick={() => {
+            const id = localStorage.getItem('userId')
+            if(id){
+              clickToPay()
+            }else{
+              router.push('/login')
+            }
+          }}
         >
           Subscribe
         </button>
